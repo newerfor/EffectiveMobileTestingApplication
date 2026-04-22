@@ -5,6 +5,7 @@ import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
 import com.example.core_navigation.NavRoutes
+import com.example.feature_favorit_course.FavoriteCourseMain
 import com.example.feature_login.ui.LoginMainScreen
 import com.example.feature_main.Main
 
@@ -23,7 +24,10 @@ fun AppNavHost() {
             )
         }
         composable(NavRoutes.MainScreen.routes){
-            Main()
+            Main(navController)
+        }
+        composable (NavRoutes.Favorite.routes){
+            FavoriteCourseMain(navController)
         }
     }
 }

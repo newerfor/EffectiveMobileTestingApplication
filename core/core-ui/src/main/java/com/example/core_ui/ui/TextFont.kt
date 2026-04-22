@@ -183,7 +183,7 @@ fun CourseMoreButtonText(
         fontFamily = Roboto,
         fontWeight = FontWeight.SemiBold,
         fontSize = 12.sp,
-        lineHeight = 15.sp,
+        lineHeight = 12.sp,
         letterSpacing = 0.4.sp,
         color = textColor,
     )
@@ -226,49 +226,13 @@ fun SortText(
     )
 }
 
-// Плейсхолдер поиска — "Search courses..."
-// Roboto 400, 14/18, letterSpacing 0.25, opacity 50%
-@Composable
-fun SearchPlaceholderText(
-    text: String,
-    textColor: Color = TextPrimary
-) {
-    Text(
-        text = text,
-        fontFamily = Roboto,
-        fontWeight = FontWeight.Normal,
-        fontSize = 14.sp,
-        lineHeight = 18.sp,
-        letterSpacing = 0.25.sp,
-        color = textColor.copy(alpha = 0.5f),
-    )
-}
-
-// Навигация активная — "Главная"
-// M3/label/medium prominent 12/16, weight 600, letterSpacing 0.5
-@Composable
-fun NavLabelActiveText(
-    text: String,
-    textColor: Color = BrandGreen
-) {
-    Text(
-        text = text,
-        fontFamily = Roboto,
-        fontWeight = FontWeight.SemiBold,
-        fontSize = 12.sp,
-        lineHeight = 16.sp,
-        letterSpacing = 0.5.sp,
-        color = textColor,
-        textAlign = TextAlign.Center,
-    )
-}
 
 // Навигация неактивная — "Избранное", "Аккаунт"
 // Android/Button small 12/15, weight 600, letterSpacing 0.4
 @Composable
 fun NavLabelInactiveText(
     text: String,
-    textColor: Color = TextPrimary
+    textColor: Color
 ) {
     Text(
         text = text,

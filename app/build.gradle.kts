@@ -51,6 +51,7 @@ dependencies {
     implementation(project(":core:core-ui"))
     implementation(project(":feature:feature-login"))
     implementation(project(":feature:feature-main"))
+    implementation(project(":feature:feature-favorit-course"))
     implementation(libs.koin.androidx.compose)
     implementation(libs.androidx.navigation.compose)
     implementation(libs.androidx.core.ktx)

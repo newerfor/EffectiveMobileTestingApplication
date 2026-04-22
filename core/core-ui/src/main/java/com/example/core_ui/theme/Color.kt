@@ -22,3 +22,4 @@ val TextPlaceholder = Color(0x80F2F2F3)
 val DividerColor = Color(0xFF4D555E)
 val InputErrorColor = Color.Red
 val LineColor = Color(0xFF4D555E)
+val nonColor = Color.Transparent

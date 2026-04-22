@@ -28,6 +28,8 @@ android {
 }
 
 dependencies {
+    implementation("androidx.compose.material:material-icons-extended")
+    implementation("androidx.compose.material:material-icons-extended")
     implementation("dev.chrisbanes.haze:haze:1.7.2")
     // BOM (обязательно)
     implementation(platform(libs.androidx.compose.bom))
@@ -42,6 +44,9 @@ dependencies {
     implementation(libs.androidx.core.ktx)
     implementation(libs.androidx.appcompat)
     implementation(project(":core:core-domain"))
+    implementation(project(":core:core-navigation"))
+    implementation(project(":core:core-viewmodel"))
+    implementation(libs.androidx.navigation.runtime.ktx)
 
     // Тесты
     testImplementation(libs.junit)

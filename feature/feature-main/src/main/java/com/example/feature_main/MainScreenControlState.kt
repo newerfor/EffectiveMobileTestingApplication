@@ -2,9 +2,10 @@ package com.example.feature_main
 
 import androidx.compose.runtime.Composable
 import com.example.core_viewmodel.courses_viewModel.CoursesUIState
+import com.example.core_viewmodel.courses_viewModel.CoursesViewModel
 
 @Composable
-fun MainScreenControlState(coursesUiState: CoursesUIState) {
+fun MainScreenControlState(coursesUiState: CoursesUIState, coursesViewModel: CoursesViewModel) {
     when(coursesUiState){
         is CoursesUIState.Empty->{
 
@@ -13,7 +14,7 @@ fun MainScreenControlState(coursesUiState: CoursesUIState) {
 
         }
         is CoursesUIState.Success->{
-            MainScreen(coursesUiState.courses)
+            MainScreen(coursesUiState.courses, coursesViewModel)
         }
         is CoursesUIState.Loading->{
 

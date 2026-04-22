@@ -1,5 +1,6 @@
 package com.example.core_domain.useCase
 
+import android.util.Log
 import com.example.core_domain.model.CoursesDomainModel
 import com.example.core_domain.repository.CoursesRepository
 
@@ -8,7 +9,7 @@ class GetAllCoursesUseCase (
 ) {
     suspend fun invoke(offset:Int,pageSet:Int,dataBaseSize:Int): Result<List<CoursesDomainModel>> = runCatching {
         if(dataBaseSize==0){
-            repository.getApiCourses(offset,pageSet,dataBaseSize)
+            repository.getCoursesByDataBase(offset,pageSet)
         }else{
             try {
                 repository.getCoursesByDataBase(offset,pageSet)

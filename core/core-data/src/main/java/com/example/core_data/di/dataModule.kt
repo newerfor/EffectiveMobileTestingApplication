@@ -14,6 +14,8 @@ import com.example.core_data.remote.remoteRepository.RemoteRepositoryImpl
 import com.example.core_domain.repository.CoursesRepository
 import org.koin.dsl.module
 import org.koin.android.ext.koin.androidContext
+import org.koin.core.qualifier.named
+
 val dataModule = module {
     single<CoursesRepository> {
         RepositoryImpl(
@@ -22,22 +24,46 @@ val dataModule = module {
             mapper = get()
         )
     }
-    single< CoursesDatabase> {
+    single<CoursesDatabase> {
         DataBaseProvider.getDatabase(androidContext())
     }
+
+    // 2. Dao
     single<CoursesDao> {
         get<CoursesDatabase>().coursesDao()
     }
+
+    // 3. Mapper
     single { Mapper() }
-    single<ApiService> { ApiClient.instance }
-    single<LocalDataSource> {
-        LocalRepositoryImpl(
-            dao = get(),
-        )
+
+    // 4. ApiService (два экземпляра с разными квалификаторами)
+    single<ApiService>(qualifier = named("main")) {
+        ApiClient.mainInstance
     }
+
+    single<ApiService>(qualifier = named("backup")) {
+        ApiClient.secondInstance
+    }
+
+    // 5. LocalDataSource
+    single<LocalDataSource> {
+        LocalRepositoryImpl(dao = get())
+    }
+
+    // 6. RemoteDataSource
     single<RemoteDataSource> {
         RemoteRepositoryImpl(
-            apiService = get()
+            apiService = get(qualifier = named("main")),
+            secondApiService = get(qualifier = named("backup"))
+        )
+    }
+
+    // 7. CoursesRepository
+    single<CoursesRepository> {
+        RepositoryImpl(
+            localDataSource = get(),
+            remoteDataSource = get(),
+            mapper = get()
         )
     }
 }
