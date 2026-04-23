@@ -21,6 +21,7 @@
             <option value="$PROJECT_DIR$/feature/feature-favorit-course" />
             <option value="$PROJECT_DIR$/feature/feature-login" />
             <option value="$PROJECT_DIR$/feature/feature-main" />
+            <option value="$PROJECT_DIR$/feature/feature-single-course" />
           </set>
         </option>
       </GradleProjectSettings>

@@ -69,13 +69,14 @@ fun InputPlaceholderText(
 @Composable
 fun ButtonLabelText(
     text: String,
-    textColor: Color = TextPrimary
+    textColor: Color = TextPrimary,
+    fontSize:Int = 16
 ) {
     Text(
         text = text,
         fontFamily = Roboto,
         fontWeight = FontWeight.Medium,
-        fontSize = 16.sp,
+        fontSize = fontSize.sp,
         lineHeight = 20.sp,
         letterSpacing = 0.sp,
         color = textColor,
@@ -138,17 +139,21 @@ fun CourseTitleText(
 @Composable
 fun CourseDescriptionText(
     text: String,
-    textColor: Color = TextPrimary
+    textColor: Color = TextPrimary,
+    maxLine:Int = 2,
+    fontSize:Int = 12,
+    lineHeight:Int = 16,
+    letterSpacing: Double = 0.4,
 ) {
     Text(
         text = text,
         fontFamily = Roboto,
         fontWeight = FontWeight.Normal,
-        fontSize = 12.sp,
-        lineHeight = 16.sp,
-        letterSpacing = 0.4.sp,
+        fontSize = fontSize.sp,
+        lineHeight = lineHeight.sp,
+        letterSpacing = letterSpacing.sp,
         color = textColor.copy(alpha = 0.7f),
-        maxLines = 2,
+        maxLines = maxLine,
         overflow = TextOverflow.Ellipsis,
     )
 }
@@ -243,5 +248,190 @@ fun NavLabelInactiveText(
         letterSpacing = 0.4.sp,
         color = textColor,
         textAlign = TextAlign.Center,
+    )
+}
+// "О курсе" — заголовок секции About
+@Composable
+fun AboutTitleText(
+    text: String,
+    textColor: Color = TextPrimary,
+) {
+    Text(
+        text = text,
+        fontFamily = Roboto,
+        fontWeight = FontWeight.Normal,
+        fontSize = 22.sp,
+        lineHeight = 28.sp,
+        letterSpacing = 0.sp,
+        color = textColor,
+    )
+}
+
+
+
+// "Java-разработчик с нуля" — заголовок курса (Title header)
+@Composable
+fun CourseTitleLargeText(
+    text: String,
+    textColor: Color = TextPrimary,
+) {
+    Text(
+        text = text,
+        fontFamily = Roboto,
+        fontWeight = FontWeight.Normal,
+        fontSize = 22.sp,
+        lineHeight = 28.sp,
+        letterSpacing = 0.sp,
+        color = textColor,
+    )
+}
+
+
+
+// "Merion Academy" — имя автора (Title в Meta)
+@Composable
+fun AuthorNameText(
+    text: String,
+    textColor: Color = TextPrimary,
+) {
+    Text(
+        text = text,
+        fontFamily = Roboto,
+        fontWeight = FontWeight.Medium,
+        fontSize = 16.sp,
+        lineHeight = 18.sp,
+        letterSpacing = 0.15.sp,
+        color = textColor,
+    )
+}
+
+// "Автор" — подпись над именем автора (Secondary Text в Meta)
+@Composable
+fun AuthorLabelText(
+    text: String,
+    textColor: Color = TextPrimary.copy(alpha = 0.5f),
+) {
+    Text(
+        text = text,
+        fontFamily = Roboto,
+        fontWeight = FontWeight.Normal,
+        fontSize = 12.sp,
+        lineHeight = 14.sp,
+        letterSpacing = 0.4.sp,
+        color = textColor,
+    )
+}
+
+
+
+// "Главная", "Избранное", "Аккаунт" — активный таб навбара
+@Composable
+fun NavBarLabelActiveText(
+    text: String,
+    textColor: Color = BrandGreen,
+) {
+    Text(
+        text = text,
+        fontFamily = Roboto,
+        fontWeight = FontWeight.SemiBold,
+        fontSize = 12.sp,
+        lineHeight = 16.sp,
+        letterSpacing = 0.5.sp,
+        textAlign = TextAlign.Center,
+        color = textColor,
+    )
+}
+
+// "Главная", "Избранное", "Аккаунт" — неактивный таб навбара
+@Composable
+fun NavBarLabelInactiveText(
+    text: String,
+    textColor: Color = TextPrimary,
+) {
+    Text(
+        text = text,
+        fontFamily = Roboto,
+        fontWeight = FontWeight.SemiBold,
+        fontSize = 12.sp,
+        lineHeight = 15.sp,
+        letterSpacing = 0.4.sp,
+        textAlign = TextAlign.Center,
+        color = textColor,
+    )
+}
+
+// "9:30" — время в статус-баре
+@Composable
+fun StatusBarTimeText(
+    text: String,
+    textColor: Color = TextPrimary,
+) {
+    Text(
+        text = text,
+        fontFamily = Roboto,
+        fontWeight = FontWeight.Normal,
+        fontSize = 14.sp,
+        lineHeight = 20.sp,
+        letterSpacing = 0.25.sp,
+        color = textColor,
+    )
+}
+// "Профиль", "Ваши курсы" — заголовки секций (Title header)
+// Используй уже существующий CourseTitleLargeText / AboutTitleText —
+// это тот же стиль: Roboto, 400, 22sp, lineHeight 28sp
+
+// "Написать в поддержку", "Настройки", "Выйти из аккаунта" — пункты меню Actions
+@Composable
+fun ActionMenuItemText(
+    text: String,
+    textColor: Color = TextPrimary,
+) {
+    Text(
+        text = text,
+        fontFamily = Roboto,
+        fontWeight = FontWeight.Medium,
+        fontSize = 14.sp,
+        lineHeight = 20.sp,
+        letterSpacing = 0.1.sp,
+        color = textColor,
+    )
+}
+
+// "3D-дженералист", "Java-разработчик с нуля" — название курса в карточке профиля
+// Используй уже существующий AuthorNameText —
+// тот же стиль: Roboto, 500, 16sp, lineHeight 18sp, letterSpacing 0.15sp
+
+// "50%", "30%" — процент прогресса под карточкой курса
+@Composable
+fun CourseProgressPercentText(
+    text: String,
+    textColor: Color = BrandGreen,
+) {
+    Text(
+        text = text,
+        fontFamily = Roboto,
+        fontWeight = FontWeight.Normal,
+        fontSize = 12.sp,
+        lineHeight = 14.sp,
+        letterSpacing = 0.4.sp,
+        color = textColor,
+    )
+}
+
+// "22/44 уроков", "15/48 уроков" — счётчик уроков справа (выравнивание right)
+@Composable
+fun CourseLessonsCountText(
+    text: String,
+    textColor: Color = BrandGreen,
+) {
+    Text(
+        text = text,
+        fontFamily = Roboto,
+        fontWeight = FontWeight.Normal,
+        fontSize = 12.sp,
+        lineHeight = 14.sp,
+        letterSpacing = 0.4.sp,
+        textAlign = TextAlign.End,
+        color = textColor,
     )
 }

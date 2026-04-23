@@ -5,4 +5,5 @@ sealed class NavRoutes(val routes: String) {
     object MainScreen : NavRoutes("main")
     object Favorite : NavRoutes("favorite")
     object Profile : NavRoutes("profile")
+    object CourseInfo: NavRoutes("course_info")
 }

@@ -7,6 +7,8 @@ interface LocalDataSource {
     suspend fun getAllCourses(offset: Int, pageSet: Int): List<CoursesEntity>
     suspend fun getCharacterByLike(offset: Int, pageSet: Int): List<CoursesEntity>
     suspend fun saveCourse(course: CoursesEntity)
+    suspend fun saveCourseByApi(course: CoursesEntity,id:Int)
+    suspend fun getCourseById(id:Int): CoursesEntity?
     suspend fun saveUser(user: UserEntity)
     suspend fun getUser(): UserEntity
 }

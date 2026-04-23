@@ -49,6 +49,7 @@ dependencies {
     implementation(project(":core:core-data"))
     implementation(project(":core:core-viewmodel"))
     implementation(project(":core:core-ui"))
+    implementation(project(":feature:feature-single-course"))
     implementation(project(":feature:feature-login"))
     implementation(project(":feature:feature-main"))
     implementation(project(":feature:feature-favorit-course"))

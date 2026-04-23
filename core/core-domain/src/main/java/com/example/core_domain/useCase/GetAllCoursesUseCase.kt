@@ -9,10 +9,13 @@ class GetAllCoursesUseCase (
 ) {
     suspend fun invoke(offset:Int,pageSet:Int,dataBaseSize:Int): Result<List<CoursesDomainModel>> = runCatching {
         if(dataBaseSize==0){
-            repository.getCoursesByDataBase(offset,pageSet)
+            repository.getApiCourses(offset,pageSet,dataBaseSize)
         }else{
             try {
-                repository.getCoursesByDataBase(offset,pageSet)
+                val localResult = repository.getCoursesByDataBase(offset,pageSet)
+                localResult.ifEmpty {
+                    repository.getApiCourses(offset, pageSet, dataBaseSize)
+                }
             }catch (e: Exception){
                 repository.getApiCourses(offset,pageSet,dataBaseSize)
             }

@@ -2,6 +2,7 @@ package com.example.core_domain.di
 
 import com.example.core_domain.repository.CoursesRepository
 import com.example.core_domain.useCase.GetAllCoursesUseCase
+import com.example.core_domain.useCase.GetCourseByIdUseCase
 import com.example.core_domain.useCase.GetCoursesByLikeUseCase
 import com.example.core_domain.useCase.GetUserInfoUseCase
 import com.example.core_domain.useCase.SaveCoursesUseCase
@@ -10,6 +11,7 @@ import org.koin.dsl.module
 
 val domainModule = module{
     factory { GetUserInfoUseCase(get()) }
+    factory { GetCourseByIdUseCase(get()) }
     factory { SaveUserInfoUseCase(get()) }
     factory { GetAllCoursesUseCase(get()) }
     factory { SaveCoursesUseCase(get()) }

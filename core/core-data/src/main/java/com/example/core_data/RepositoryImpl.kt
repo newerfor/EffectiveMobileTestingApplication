@@ -46,14 +46,14 @@ class RepositoryImpl(
             if (apiResult.courses.size >= pageSet) {
                 // Сохраняем первые pageSet курсов синхронно
                 apiResult.courses.take(pageSet).forEach { course ->
-                    localDataSource.saveCourse(mapper.mapModelToEntityCourse(course))
+                    localDataSource.saveCourseByApi(mapper.mapModelToEntityCourse(course),course.id)
                 }
                 // Остальные сохраняем асинхронно
                 saveCourseBatch(apiResult.courses.drop(pageSet))
             } else {
                 // Если API вернул меньше, чем pageSet, сохраняем все
                 apiResult.courses.forEach { course ->
-                    localDataSource.saveCourse(mapper.mapModelToEntityCourse(course))
+                    localDataSource.saveCourseByApi(mapper.mapModelToEntityCourse(course),course.id)
                 }
             }
 
@@ -130,10 +130,20 @@ class RepositoryImpl(
         Log.d("Pagination_DB", "🏁 Все попытки исчерпаны (currentPageSet=0), возвращаем пустой список")
         return emptyList()
     }
+
+    override suspend fun getCoursesById(id:Int): CoursesDomainModel {
+        val result = localDataSource.getCourseById(id)
+        return if(result!=null){
+           mapper.mapEntityToDomainCourse(result)
+        }else{
+            throw RuntimeException("Данные пусты")
+        }
+    }
+
     fun saveCourseBatch(course: List<CourseModel>) {
         CoroutineScope(Dispatchers.IO).launch {
             course.forEach { course ->
-                localDataSource.saveCourse(mapper.mapModelToEntityCourse(course))
+                localDataSource.saveCourseByApi(mapper.mapModelToEntityCourse(course),course.id)
             }
         }
     }

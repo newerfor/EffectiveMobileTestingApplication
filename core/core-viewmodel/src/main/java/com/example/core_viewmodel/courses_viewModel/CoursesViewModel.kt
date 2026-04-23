@@ -6,8 +6,10 @@ import androidx.lifecycle.viewModelScope
 import com.example.core_domain.model.CoursesDomainModel
 import com.example.core_domain.repository.CoursesRepository
 import com.example.core_domain.useCase.GetAllCoursesUseCase
+import com.example.core_domain.useCase.GetCourseByIdUseCase
 import com.example.core_domain.useCase.GetCoursesByLikeUseCase
 import com.example.core_domain.useCase.SaveCoursesUseCase
+import com.example.core_viewmodel.constant.ViewModelLogicConstant.PAGE_SIZE
 import com.example.core_viewmodel.userInfo_viewModel.UserInfoUIState
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
@@ -18,7 +20,8 @@ import kotlin.onSuccess
 class CoursesViewModel(
     private val getAllCoursesUseCase: GetAllCoursesUseCase,
     private val getCoursesByLikeUseCase: GetCoursesByLikeUseCase,
-    private val saveCoursesUseCase: SaveCoursesUseCase
+    private val saveCoursesUseCase: SaveCoursesUseCase,
+    private val getCourseByIdUseCase: GetCourseByIdUseCase
 ) : ViewModel() {
     private val _coursesUiState = MutableStateFlow<CoursesUIState>(CoursesUIState.Loading)
     val coursesUiState: StateFlow<CoursesUIState> = _coursesUiState.asStateFlow()
@@ -26,21 +29,24 @@ class CoursesViewModel(
     private var coursesInfo = mutableListOf<CoursesDomainModel>()
     private var isSorted = false
     private var dataBaseSize = 0
-    private val pageSet = 2
+    private var totalCoursesCount = 0
+
+    fun getTotalCoursesCount(): Int = totalCoursesCount
+
     fun getAllCourses() {
         viewModelScope.launch {
             _coursesUiState.value = CoursesUIState.Loading
-            val result = getAllCoursesUseCase.invoke(offSet, pageSet, dataBaseSize)
+            val result = getAllCoursesUseCase.invoke(offSet, PAGE_SIZE, dataBaseSize)
             result.onSuccess { courses ->
                 coursesInfo.addAll(courses)
-                offSet += pageSet
+                offSet += PAGE_SIZE
                 dataBaseSize += courses.size
                 _coursesUiState.value = CoursesUIState.Success(courses)
             }.onFailure { error ->
                 if (error.toString() == "Данные пусты") {
-                    _coursesUiState.value = CoursesUIState.Empty
+                    _coursesUiState.value = CoursesUIState.Empty(coursesInfo)
                 } else {
-                    _coursesUiState.value = CoursesUIState.Error(error.toString())
+                    _coursesUiState.value = CoursesUIState.Error
                 }
             }
         }
@@ -53,15 +59,21 @@ class CoursesViewModel(
     fun getCoursesByLike(){
         viewModelScope.launch {
             _coursesUiState.value = CoursesUIState.Loading
-            val result = getCoursesByLikeUseCase.invoke(offSet,pageSet)
-            result.onSuccess { user ->
-                offSet += pageSet
-                _coursesUiState.value = CoursesUIState.Success(user)
+            val result = getCoursesByLikeUseCase.invoke(offSet,PAGE_SIZE)
+            result.onSuccess { courses ->
+                totalCoursesCount = coursesInfo.size + courses.size
+                coursesInfo.addAll(courses)
+                offSet += PAGE_SIZE
+                if(courses.isEmpty()){
+                    _coursesUiState.value = CoursesUIState.Empty(coursesInfo)
+                }else{
+                    _coursesUiState.value = CoursesUIState.Success(coursesInfo)
+                }
             }.onFailure { error ->
                 if (error.toString() == "Данные пусты") {
-                    _coursesUiState.value = CoursesUIState.Empty
+                    _coursesUiState.value = CoursesUIState.Empty(coursesInfo)
                 } else {
-                    _coursesUiState.value = CoursesUIState.Error(error.toString())
+                    _coursesUiState.value = CoursesUIState.Error
                 }
             }
         }
@@ -73,10 +85,11 @@ class CoursesViewModel(
     }
     fun getNextPage() {
         viewModelScope.launch {
+            _coursesUiState.value = CoursesUIState.DataLoading(coursesInfo)
             Log.d("ViewModel", "=== getNextPage ===")
             Log.d("ViewModel", "До вызова: coursesInfo.size=${coursesInfo.size}, offSet=$offSet")
 
-            val result = getAllCoursesUseCase.invoke(offSet, pageSet, dataBaseSize)
+            val result = getAllCoursesUseCase.invoke(offSet, PAGE_SIZE, dataBaseSize)
             result.onSuccess { courses ->
                 Log.d("ViewModel", "GetNextPage: получено ${courses.size} курсов")
                 courses.forEach { course ->
@@ -84,7 +97,7 @@ class CoursesViewModel(
                 }
 
                 coursesInfo.addAll(courses)
-                offSet += pageSet
+                offSet += PAGE_SIZE
                 dataBaseSize += courses.size
 
                 val sortedList = sortingHelper(coursesInfo)
@@ -108,5 +121,18 @@ class CoursesViewModel(
         }
         Log.d("ViewModel", "sortingHelper: выходной список size=${result.size}")
         return result
+    }
+    fun getCourseById(id:Int){
+        viewModelScope.launch {
+            viewModelScope.launch {
+                _coursesUiState.value = CoursesUIState.Loading
+                val result = getCourseByIdUseCase.invoke(id)
+                result.onSuccess { courses ->
+                        _coursesUiState.value = CoursesUIState.Success(listOf(courses))
+                }.onFailure { error ->
+                    _coursesUiState.value = CoursesUIState.Error
+                }
+            }
+        }
     }
 }

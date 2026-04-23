@@ -12,6 +12,25 @@ import com.example.core_data.local.model.UserEntity
 interface CoursesDao {
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     suspend fun saveCourse(course: CoursesEntity)
+    @Query("""
+        UPDATE courses SET 
+            title = :title,
+            text = :text,
+            price = :price,
+            rate = :rate,
+            startDate = :startDate,
+            publishDate = :publishDate
+        WHERE id = :id
+    """)
+    suspend fun updateCourseExceptLike(
+        id: Int,
+        title: String,
+        text: String,
+        price: String,
+        rate: String,
+        startDate: String,
+        publishDate: String
+    )
 
     @Query("SELECT * FROM courses LIMIT :pageSet OFFSET :offset")
     suspend fun getAllCourses(offset: Int, pageSet: Int): List<CoursesEntity>
@@ -24,4 +43,6 @@ interface CoursesDao {
 
     @Query("SELECT * FROM user WHERE id = :userId")
     suspend fun getUser(userId: Int=USER_ID): UserEntity
+    @Query("SELECT * FROM courses WHERE id = :id")
+    suspend fun getCourseById(id:Int): CoursesEntity?
 }

@@ -10,4 +10,5 @@ interface CoursesRepository {
     suspend fun getCoursesByLike(offset:Int,pageSet:Int):List<CoursesDomainModel>
     suspend fun saveCourses(courses: CoursesDomainModel)
     suspend fun getCoursesByDataBase(offset:Int,pageSet:Int):List<CoursesDomainModel>
+    suspend fun getCoursesById(id:Int):CoursesDomainModel
 }
