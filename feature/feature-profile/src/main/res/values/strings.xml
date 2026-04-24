@@ -1,0 +1,8 @@
+<resources>
+    <string name="app_name">feature-profile</string>
+    <string name="label_text">Профиль</string>
+    <string name="second_label_text">Ваши курсы</string>
+    <string name="send_to_helper">Написать в поддержку</string>
+    <string name="go_to_setting">Настройки</string>
+    <string name="exit_account">Выйти из аккаунта</string>
+</resources>

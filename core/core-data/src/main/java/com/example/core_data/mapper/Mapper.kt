@@ -5,7 +5,7 @@ import com.example.core_data.local.model.UserEntity
 import com.example.core_data.remote.model.CourseModel
 import com.example.core_domain.model.CoursesDomainModel
 import com.example.core_domain.model.UserInfoDomainModel
-
+import com.example.core_domain.R
 class Mapper {
     fun mapEntityToDomainUser(user: UserEntity): UserInfoDomainModel{
         return UserInfoDomainModel(
@@ -19,8 +19,8 @@ class Mapper {
             password = user.password
         )
     }
-    fun mapModelToEntityCourse(course: CourseModel): CoursesEntity{
-        return CoursesEntity(
+    fun mapModelToDomainCourse(course: CourseModel,imageIndex:Int): CoursesDomainModel{
+        return CoursesDomainModel(
             id = course.id,
             title = course.title,
             text = course.text,
@@ -28,7 +28,8 @@ class Mapper {
             rate = course.rate,
             startDate = course.startDate,
             hasLike = course.hasLike,
-            publishDate = course.publishDate
+            publishDate = course.publishDate,
+            imageIndex = imageIndex
         )
     }
     fun mapEntityToDomainCourse(course: CoursesEntity): CoursesDomainModel{
@@ -40,7 +41,8 @@ class Mapper {
             rate = course.rate,
             startDate = course.startDate,
             hasLike = course.hasLike,
-            publishDate = course.publishDate
+            publishDate = course.publishDate,
+            imageIndex = course.image
         )
     }
     fun mapDomainToEntityCourse(course: CoursesDomainModel):CoursesEntity {
@@ -52,7 +54,8 @@ class Mapper {
             rate = course.rate,
             startDate = course.startDate,
             hasLike = course.hasLike,
-            publishDate = course.publishDate
+            publishDate = course.publishDate,
+            image =course.imageIndex
         )
     }
 }

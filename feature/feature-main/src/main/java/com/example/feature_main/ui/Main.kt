@@ -44,17 +44,12 @@ fun MainView(
     val coursesUiState by coursesViewModel.coursesUiState.collectAsState()
     var onLoading = remember { mutableStateOf(false) }
     var onEmpty = remember { mutableStateOf(false) }
-    val listState = rememberScrollState()
-
     LaunchedEffect(Unit) {
         coursesViewModel.getAllCourses()
     }
-    LaunchedEffect(coursesUiState) {
-        Log.d("asldjgndkbngdbghj",coursesUiState.toString())
-    }
     Column(Modifier.fillMaxSize().padding(top = MAIN_TOP_PADDING)){
         CoursesUIState(coursesUiState,onLoading,onEmpty,{courses->
-            MainScreen(courses, coursesViewModel,onLoading,onEmpty, listState =listState)
+            MainScreen(courses, coursesViewModel)
         }){
             coursesViewModel.getAllCourses()
         }

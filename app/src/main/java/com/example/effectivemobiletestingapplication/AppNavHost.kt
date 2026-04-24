@@ -8,12 +8,13 @@ import com.example.core_navigation.NavRoutes
 import com.example.feature_favorit_course.ui.FavoriteCourseMain
 import com.example.feature_login.ui.LoginMainScreen
 import com.example.feature_main.ui.Main
-import com.example.feature_single_course.CourseInfoMain
+import com.example.feature_profile.ui.ProfileMain
+import com.example.feature_single_course.ui.CourseInfoMain
 
 @Composable
 fun AppNavHost() {
     val navController = rememberNavController()
-    NavHost(navController = navController, startDestination = NavRoutes.CourseInfo.routes)
+    NavHost(navController = navController, startDestination = NavRoutes.Profile.routes)
     {
         composable(NavRoutes.Login.routes) {
             LoginMainScreen(
@@ -32,6 +33,9 @@ fun AppNavHost() {
         }
         composable(NavRoutes.CourseInfo.routes){
             CourseInfoMain(navController,100)
+        }
+        composable(NavRoutes.Profile.routes){
+            ProfileMain(navController)
         }
     }
 }

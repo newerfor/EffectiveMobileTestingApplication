@@ -7,7 +7,7 @@ import com.example.core_domain.repository.CoursesRepository
 class GetCoursesByLikeUseCase(
     private val repository: CoursesRepository
 ) {
-    suspend fun invoke(offset:Int,pageSet:Int): Result<List<CoursesDomainModel>> = runCatching {
-        repository.getCoursesByLike(offset,pageSet)
+    suspend fun invoke(): Result<List<CoursesDomainModel>> = runCatching {
+        repository.getCoursesByLike()
     }
 }

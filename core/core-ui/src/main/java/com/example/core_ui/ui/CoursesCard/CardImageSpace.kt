@@ -22,9 +22,16 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.res.painterResource
-import androidx.compose.ui.unit.dp
 import com.example.core_domain.model.CoursesDomainModel
 import com.example.core_ui.R
+import com.example.core_ui.constant.CoursesCardConstant.CONTAINER_PADDING
+import com.example.core_ui.constant.CoursesCardConstant.GLASS_CHIP_ICON_SIZE
+import com.example.core_ui.constant.CoursesCardConstant.GLASS_CHIP_SPACER_WIDTH
+import com.example.core_ui.constant.CoursesCardConstant.ICON_SIZE
+import com.example.core_ui.constant.CoursesCardConstant.IMAGE_ALIGNMENT_HORIZONTAL_BIAS
+import com.example.core_ui.constant.CoursesCardConstant.IMAGE_ALIGNMENT_VERTICAL_BIAS
+import com.example.core_ui.constant.CoursesCardConstant.IMAGE_CORNER_RADIUS
+import com.example.core_ui.constant.CoursesCardConstant.IMAGE_HEIGHT
 import com.example.core_ui.theme.BrandGreen
 import com.example.core_ui.theme.TextPrimary
 import com.example.core_ui.ui.CourseInfoChipText
@@ -34,64 +41,87 @@ import dev.chrisbanes.haze.hazeSource
 import dev.chrisbanes.haze.rememberHazeState
 
 @Composable
-fun CardImageSpace(imageIndex: Int, course: CoursesDomainModel, coursesViewModel: CoursesViewModel){
+fun CardImageSpace(course: CoursesDomainModel, coursesViewModel: CoursesViewModel) {
     var isLiked = remember { mutableStateOf(course.hasLike) }
     val hazeState = rememberHazeState()
-    val imageList= listOf(
+    val imageList = listOf(
+        painterResource(R.drawable.three_course),
         painterResource(R.drawable.first_course),
         painterResource(R.drawable.second_course),
-        painterResource(R.drawable.three_course),
     )
+
     Box(
         modifier = Modifier
-            .height(130.dp)
+            .height(IMAGE_HEIGHT)
             .fillMaxWidth()
-            .clip(RoundedCornerShape(16.dp))
+            .clip(RoundedCornerShape(IMAGE_CORNER_RADIUS))
     ) {
         Image(
-            painter = imageList[imageIndex],
+            painter = imageList[course.imageIndex],
             contentDescription = "",
             modifier = Modifier
                 .fillMaxSize()
                 .hazeSource(state = hazeState),
             contentScale = ContentScale.Crop,
             alignment = BiasAlignment(
-                horizontalBias = 0f,
-                verticalBias = -0.4f
+                horizontalBias = IMAGE_ALIGNMENT_HORIZONTAL_BIAS,
+                verticalBias = IMAGE_ALIGNMENT_VERTICAL_BIAS
             )
         )
+
         Row(
-            modifier = Modifier.fillMaxSize().padding(8.dp),
+            modifier = Modifier.fillMaxSize().padding(CONTAINER_PADDING),
             horizontalArrangement = Arrangement.End,
             verticalAlignment = Alignment.Top
         ) {
-            GlassCircleButton(hazeState,{
-                if(isLiked.value){
-                    isLiked.value=false
-                }else{
+            GlassCircleButton(hazeState, {
+                if (isLiked.value) {
+                    isLiked.value = false
+                    coursesViewModel.deleteCourse(
+                        CoursesDomainModel(
+                            id = course.id,
+                            title = course.title,
+                            text = course.text,
+                            price = course.price,
+                            rate = course.rate,
+                            startDate = course.startDate,
+                            hasLike = isLiked.value,
+                            publishDate = course.publishDate,
+                            imageIndex = course.imageIndex,
+                        )
+                    )
+                } else {
                     isLiked.value = true
+                    coursesViewModel.saveCourse(
+                        CoursesDomainModel(
+                            id = course.id,
+                            title = course.title,
+                            text = course.text,
+                            price = course.price,
+                            rate = course.rate,
+                            startDate = course.startDate,
+                            hasLike = isLiked.value,
+                            publishDate = course.publishDate,
+                            imageIndex = course.imageIndex,
+                        )
+                    )
                 }
-                coursesViewModel.saveCourses(CoursesDomainModel(
-                    id = course.id,
-                    title = course.title,
-                    text = course.text,
-                    price = course.price,
-                    rate = course.rate,
-                    startDate = course.startDate,
-                    hasLike = isLiked.value,
-                    publishDate = course.publishDate
-                ))
-            }){
+            }) {
                 Icon(
-                    painter = if(isLiked.value){painterResource(R.drawable.bookmark_filled)}else{painterResource(R.drawable.bookmark)},
+                    painter = if (isLiked.value) {
+                        painterResource(R.drawable.bookmark_filled)
+                    } else {
+                        painterResource(R.drawable.bookmark)
+                    },
                     contentDescription = null,
-                    tint =  if(isLiked.value){BrandGreen}else{TextPrimary},
-                    modifier = Modifier.size(16.dp)
+                    tint = if (isLiked.value) BrandGreen else TextPrimary,
+                    modifier = Modifier.size(ICON_SIZE)
                 )
             }
         }
+
         Row(
-            modifier = Modifier.fillMaxSize().padding(8.dp),
+            modifier = Modifier.fillMaxSize().padding(CONTAINER_PADDING),
             horizontalArrangement = Arrangement.Start,
             verticalAlignment = Alignment.Bottom
         ) {
@@ -100,11 +130,11 @@ fun CardImageSpace(imageIndex: Int, course: CoursesDomainModel, coursesViewModel
                     painter = painterResource(R.drawable.star),
                     contentDescription = null,
                     tint = BrandGreen,
-                    modifier = Modifier.size(12.dp)
+                    modifier = Modifier.size(GLASS_CHIP_ICON_SIZE)
                 )
                 CourseInfoChipText(text = course.rate)
             }
-            Spacer(Modifier.width(4.dp))
+            Spacer(Modifier.width(GLASS_CHIP_SPACER_WIDTH))
             GlassChip(hazeState) {
                 CourseInfoChipText(text = dateHelperIntToString(course.startDate))
             }

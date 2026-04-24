@@ -1,6 +1,7 @@
 package com.example.core_domain.di
 
 import com.example.core_domain.repository.CoursesRepository
+import com.example.core_domain.useCase.DeleteCourseUseCase
 import com.example.core_domain.useCase.GetAllCoursesUseCase
 import com.example.core_domain.useCase.GetCourseByIdUseCase
 import com.example.core_domain.useCase.GetCoursesByLikeUseCase
@@ -16,5 +17,5 @@ val domainModule = module{
     factory { GetAllCoursesUseCase(get()) }
     factory { SaveCoursesUseCase(get()) }
     factory { GetCoursesByLikeUseCase(get()) }
-
+    factory { DeleteCourseUseCase(get()) }
 }

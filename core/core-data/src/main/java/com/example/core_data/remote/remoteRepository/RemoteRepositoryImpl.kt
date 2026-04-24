@@ -12,10 +12,8 @@ class RemoteRepositoryImpl(
 
     override suspend fun getCoursesRemote(): CoursesModel {
         return try {
-            // Пытаемся получить через основной API
             apiService.getCourses()
         } catch (e: Exception) {
-            // Если ошибка — пробуем через второй
             try {
                 secondApiService.getCoursesSecondApi()
             } catch (e2: Exception) {

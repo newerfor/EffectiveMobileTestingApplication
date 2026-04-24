@@ -1,3 +1,7 @@
 <resources>
     <string name="app_name">feature-single-course</string>
+    <string name="avtor_label">Автор</string>
+    <string name="button_text_start_course">Начать курс</string>
+    <string name="button_text_go_to_platform">Перейти на платформу</string>
+    <string name="cours_info_text">О курсе</string>
 </resources>

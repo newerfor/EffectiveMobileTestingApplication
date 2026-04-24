@@ -27,10 +27,17 @@ import androidx.compose.ui.draw.drawBehind
 import androidx.compose.ui.geometry.Offset
 import androidx.compose.ui.graphics.painter.Painter
 import androidx.compose.ui.res.painterResource
-import androidx.compose.ui.unit.dp
 import androidx.navigation.NavController
 import com.example.core_navigation.NavRoutes
 import com.example.core_ui.R
+import com.example.core_ui.constant.NavigationBarConstant.FOOTER_ITEM_CORNER
+import com.example.core_ui.constant.NavigationBarConstant.FOOTER_ITEM_HEIGHT
+import com.example.core_ui.constant.NavigationBarConstant.FOOTER_ITEM_ICON_SIZE
+import com.example.core_ui.constant.NavigationBarConstant.FOOTER_ITEM_SPACER
+import com.example.core_ui.constant.NavigationBarConstant.FOOTER_ITEM_WIDTH
+import com.example.core_ui.constant.NavigationBarConstant.NAV_BAR_HEIGHT
+import com.example.core_ui.constant.NavigationBarConstant.NAV_BAR_ITEM_PADDING_START
+import com.example.core_ui.constant.NavigationBarConstant.NAV_BAR_STROKE_WIDTH
 import com.example.core_ui.theme.BackgroundAvatar
 import com.example.core_ui.theme.BackgroundInput
 import com.example.core_ui.theme.BrandGreen
@@ -56,44 +63,40 @@ fun NavigationBar(
     Column(
         modifier = Modifier
             .fillMaxWidth()
-            .height(80.dp)
+            .height(NAV_BAR_HEIGHT)
             .background(BackgroundAvatar)
             .drawBehind {
                 drawLine(
                     color = LineColor,
                     start = Offset(0f, 0f),
                     end = Offset(size.width, 0f),
-                    strokeWidth = 1.dp.toPx()
+                    strokeWidth = NAV_BAR_STROKE_WIDTH.toPx()
                 )
             }
     ) {
-        Row(
-            modifier = Modifier.fillMaxSize()
-        ) {
+        Row(modifier = Modifier.fillMaxSize()) {
             Column(
                 modifier = Modifier
                     .fillMaxHeight()
                     .weight(1f)
-                    .padding(start = 8.dp),
+                    .padding(start = NAV_BAR_ITEM_PADDING_START),
                 Arrangement.Center, Alignment.CenterHorizontally
             ) {
-                FooterItem(painterResource(R.drawable.footer_main),"Главная",selectedIndex,1){
+                FooterItem(painterResource(R.drawable.footer_main), "Главная", selectedIndex, 1) {
                     if (selectedIndex.value != 1) {
                         navController.navigate(NavRoutes.MainScreen.routes)
                         selectedIndex.value = 1
                     }
                 }
-
-
             }
             Column(
                 modifier = Modifier
                     .fillMaxHeight()
                     .weight(1f)
-                    .padding(start = 8.dp),
+                    .padding(start = NAV_BAR_ITEM_PADDING_START),
                 Arrangement.Center, Alignment.CenterHorizontally
             ) {
-                FooterItem( painterResource(R.drawable.footer_bookmark),"Избранное",selectedIndex,2){
+                FooterItem(painterResource(R.drawable.footer_bookmark), "Избранное", selectedIndex, 2) {
                     if (selectedIndex.value != 2) {
                         navController.navigate(NavRoutes.Favorite.routes)
                         selectedIndex.value = 2
@@ -104,10 +107,10 @@ fun NavigationBar(
                 modifier = Modifier
                     .fillMaxHeight()
                     .weight(1f)
-                    .padding(start = 8.dp),
+                    .padding(start = NAV_BAR_ITEM_PADDING_START),
                 Arrangement.Center, Alignment.CenterHorizontally
             ) {
-                FooterItem( painterResource(R.drawable.footer_profile),"Аккаунт",selectedIndex,3){
+                FooterItem(painterResource(R.drawable.footer_profile), "Аккаунт", selectedIndex, 3) {
                     if (selectedIndex.value != 3) {
                         navController.navigate(NavRoutes.Profile.routes)
                         selectedIndex.value = 3
@@ -117,29 +120,34 @@ fun NavigationBar(
         }
     }
 }
+
 @Composable
 fun FooterItem(
     painterResource: Painter,
     text: String,
     selectedIndex: MutableState<Int>,
     itemIndex: Int,
-    onClick: () -> Unit,)
-{
-    Box(Modifier.width(64.dp).height(32.dp).clip(RoundedCornerShape(16.dp)).background(
-        if(selectedIndex.value == itemIndex){BackgroundInput}else{nonColor}
-    ).clickable{
-        onClick.invoke()
-    }, contentAlignment = Alignment.Center){
+    onClick: () -> Unit,
+) {
+    Box(
+        Modifier
+            .width(FOOTER_ITEM_WIDTH)
+            .height(FOOTER_ITEM_HEIGHT)
+            .clip(RoundedCornerShape(FOOTER_ITEM_CORNER))
+            .background(if (selectedIndex.value == itemIndex) BackgroundInput else nonColor)
+            .clickable { onClick.invoke() },
+        contentAlignment = Alignment.Center
+    ) {
         Icon(
-            painter =painterResource ,
+            painter = painterResource,
             contentDescription = null,
-            tint = if(selectedIndex.value == itemIndex){BrandGreen}else{TextPrimary},
-            modifier = Modifier.size(24.dp)
+            tint = if (selectedIndex.value == itemIndex) BrandGreen else TextPrimary,
+            modifier = Modifier.size(FOOTER_ITEM_ICON_SIZE)
         )
     }
-    Spacer(Modifier.height(4.dp))
+    Spacer(Modifier.height(FOOTER_ITEM_SPACER))
     NavLabelInactiveText(
         text = text,
-        textColor = if(selectedIndex.value == itemIndex){BrandGreen}else{TextPrimary}
+        textColor = if (selectedIndex.value == itemIndex) BrandGreen else TextPrimary
     )
 }

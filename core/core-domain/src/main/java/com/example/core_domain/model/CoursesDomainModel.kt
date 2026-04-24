@@ -1,5 +1,7 @@
 package com.example.core_domain.model
 
+import android.media.Image
+
 data class CoursesDomainModel(
     val id: Int,
     val title: String,
@@ -9,4 +11,5 @@ data class CoursesDomainModel(
     val startDate: String,
     val hasLike: Boolean,
     val publishDate: String,
+    val imageIndex: Int,
 )

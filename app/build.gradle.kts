@@ -52,6 +52,7 @@ dependencies {
     implementation(project(":feature:feature-single-course"))
     implementation(project(":feature:feature-login"))
     implementation(project(":feature:feature-main"))
+    implementation(project(":feature:feature-profile"))
     implementation(project(":feature:feature-favorit-course"))
     implementation(libs.koin.androidx.compose)
     implementation(libs.androidx.navigation.compose)

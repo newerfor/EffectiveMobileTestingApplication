@@ -18,10 +18,6 @@ fun CoursesUIState(
     onRetryClick: () -> Unit
 ) {
     when (coursesUiState) {
-        is CoursesUIState.Empty -> {
-            onEmpty.value = true
-            onSuccess.invoke(coursesUiState.courses)
-        }
         is CoursesUIState.Error -> {
             onEmpty.value = true
             ErrorMessage(onRetryClick)
@@ -33,10 +29,6 @@ fun CoursesUIState(
         }
         is CoursesUIState.Loading -> {
             LoadRound()
-        }
-        is CoursesUIState.DataLoading -> {
-            onLoading.value = true
-            onSuccess.invoke(coursesUiState.courses)
         }
     }
 }

@@ -66,9 +66,6 @@ fun FavoriteCourseView(
                 FavoriteCourseMainScreen(
                     courses = courses,
                     coursesViewModel = coursesViewModel,
-                    onLoading = onLoading,
-                    onEmpty = onEmpty,
-                    listState
                 )
             },
             onRetryClick = {

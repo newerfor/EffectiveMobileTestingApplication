@@ -24,4 +24,6 @@ val DividerColor = Color(0xFF4D555E)
 val InputErrorColor = Color.Red
 val LineColor = Color(0xFF4D555E)
 
+// Shared glass style
+val GlassBackGroundColor = Color(0xFF32333A)
 val nonColor = Color.Transparent

@@ -8,26 +8,25 @@ import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
-import androidx.compose.ui.unit.dp
 import com.example.core_domain.model.CoursesDomainModel
+import com.example.core_ui.constant.CoursesCardConstant.CARD_CORNER_RADIUS
+import com.example.core_ui.constant.CoursesCardConstant.CARD_HORIZONTAL_PADDING
 import com.example.core_ui.theme.BackgroundAvatar
 import com.example.core_viewmodel.courses_viewModel.CoursesViewModel
 
 @Composable
 fun CoursesCard(
     course: CoursesDomainModel,
-    imageIndex: Int,
     coursesViewModel: CoursesViewModel
 ) {
     Column(
         modifier = Modifier
             .fillMaxWidth()
-            .padding(horizontal = 16.dp)
-            .clip(RoundedCornerShape(16.dp))
+            .padding(horizontal = CARD_HORIZONTAL_PADDING)
+            .clip(RoundedCornerShape(CARD_CORNER_RADIUS))
             .background(BackgroundAvatar)
     ) {
         CardImageSpace(
-            imageIndex = imageIndex,
             course,
             coursesViewModel
         )

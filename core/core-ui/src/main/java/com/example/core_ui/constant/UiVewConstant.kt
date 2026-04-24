@@ -1,0 +1,121 @@
+package com.example.core_ui.constant
+
+import androidx.compose.ui.unit.dp
+import androidx.compose.ui.unit.sp
+
+
+object CoursesCardConstant{
+    val GLASS_CHIP_CORNER = 12.dp
+    val GLASS_CHIP_PADDING_HORIZONTAL = 6.dp
+    val GLASS_CHIP_PADDING_VERTICAL = 4.dp
+    val GLASS_CHIP_SPACING = 4.dp
+    val GLASS_CIRCLE_BUTTON_SIZE = 28.dp
+    val GLASS_TINT_ALPHA = 0.3f
+    val GLASS_BLUR_RADIUS = 8.dp
+    val CARD_SPACER_HEIGHT = 16.dp
+    val CARD_HORIZONTAL_PADDING = 16.dp
+    val CARD_CORNER_RADIUS = 16.dp
+    val CARD_HEIGHT = 236.dp
+    val HORIZONTAL_PADDING = 16.dp
+    val TOP_SPACER_HEIGHT = 16.dp
+    val TITLE_TO_DESCRIPTION_SPACER_HEIGHT = 12.dp
+    val DESCRIPTION_TO_PRICE_SPACER_HEIGHT = 11.dp
+    val BUTTON_ICON_SPACER_WIDTH = 4.dp
+    val BOTTOM_SPACER_HEIGHT = 16.dp
+    val ICON_OFFSET_Y = 1.dp
+    val IMAGE_HEIGHT = 130.dp
+    val IMAGE_CORNER_RADIUS = 16.dp
+    val CONTAINER_PADDING = 8.dp
+    val ICON_SIZE = 16.dp
+    val GLASS_CHIP_ICON_SIZE = 12.dp
+    val GLASS_CHIP_SPACER_WIDTH = 4.dp
+    val IMAGE_ALIGNMENT_VERTICAL_BIAS = -0.4f
+    val IMAGE_ALIGNMENT_HORIZONTAL_BIAS = 0f
+}
+object NavigationBarConstant{
+    val LOAD_ROUND_SIZE = 50.dp
+
+    // EmptyMessage
+    val EMPTY_MESSAGE_TOP_SPACER = 24.dp
+    val EMPTY_MESSAGE_TITLE_TO_DESC_SPACER = 8.dp
+    val EMPTY_MESSAGE_DESC_TO_BUTTON_SPACER = 32.dp
+    val EMPTY_MESSAGE_BUTTON_CORNER = 12.dp
+
+    // ErrorMessage
+    val ERROR_MESSAGE_PADDING = 12.dp
+    val ERROR_MESSAGE_BOX_CORNER = 20.dp
+    val ERROR_MESSAGE_BOX_PADDING = 10.dp
+    val ERROR_MESSAGE_BUTTON_PADDING = 5.dp
+    val ERROR_MESSAGE_BUTTON_CORNER = 12.dp
+    val ERROR_MESSAGE_BUTTON_FONT_SIZE = 12
+
+    // NavigationBar
+    val NAV_BAR_HEIGHT = 80.dp
+    val NAV_BAR_STROKE_WIDTH = 1.dp
+    val NAV_BAR_ITEM_PADDING_START = 8.dp
+
+    // FooterItem
+    val FOOTER_ITEM_WIDTH = 64.dp
+    val FOOTER_ITEM_HEIGHT = 32.dp
+    val FOOTER_ITEM_CORNER = 16.dp
+    val FOOTER_ITEM_ICON_SIZE = 24.dp
+    val FOOTER_ITEM_SPACER = 4.dp
+}
+object StateViewConstant{
+    val LOAD_ROUND_SIZE = 50.dp
+
+    // EmptyMessage
+    val EMPTY_MESSAGE_TOP_SPACER = 24.dp
+    val EMPTY_MESSAGE_TITLE_TO_DESC_SPACER = 8.dp
+    val EMPTY_MESSAGE_DESC_TO_BUTTON_SPACER = 32.dp
+    val EMPTY_MESSAGE_BUTTON_CORNER = 12.dp
+
+    // ErrorMessage
+    val ERROR_MESSAGE_PADDING = 12.dp
+    val ERROR_MESSAGE_BOX_CORNER = 20.dp
+    val ERROR_MESSAGE_BOX_PADDING = 10.dp
+    val ERROR_MESSAGE_BUTTON_PADDING = 5.dp
+    val ERROR_MESSAGE_BUTTON_CORNER = 12.dp
+    val ERROR_MESSAGE_BUTTON_FONT_SIZE = 12
+}
+object TextConstant {
+    val LOGIN_TITLE_FONT_SIZE = 28.sp
+    val LOGIN_TITLE_LINE_HEIGHT = 36.sp
+    val LOGIN_TITLE_LETTER_SPACING = 0.sp
+    val INPUT_LABEL_FONT_SIZE = 16.sp
+    val INPUT_LABEL_LINE_HEIGHT = 18.sp
+    val INPUT_LABEL_LETTER_SPACING = 0.15.sp
+    val INPUT_PLACEHOLDER_FONT_SIZE = 14.sp
+    val INPUT_PLACEHOLDER_LINE_HEIGHT = 20.sp
+    val BUTTON_LABEL_FONT_SIZE = 16.sp
+    val BUTTON_LABEL_LINE_HEIGHT = 20.sp
+    val BUTTON_LABEL_LETTER_SPACING = 0.sp
+    val ACTION_LINK_FONT_SIZE = 12.sp
+    val ACTION_LINK_LINE_HEIGHT = 15.sp
+    val ACTION_LINK_LETTER_SPACING = 0.4.sp
+    val ERROR_INPUT_PADDING_START = 16.dp
+    val COURSE_TITLE_FONT_SIZE = 16.sp
+    val COURSE_TITLE_LINE_HEIGHT = 18.sp
+    val COURSE_TITLE_LETTER_SPACING = 0.15.sp
+    val COURSE_DESCRIPTION_FONT_SIZE = 12.sp
+    val COURSE_DESCRIPTION_LINE_HEIGHT = 16.sp
+    val COURSE_DESCRIPTION_LETTER_SPACING = 0.4.sp
+    val COURSE_DESCRIPTION_ALPHA = 0.7f
+    val COURSE_DESCRIPTION_MAX_LINES = 2
+    val COURSE_MORE_BUTTON_FONT_SIZE = 12.sp
+    val COURSE_MORE_BUTTON_LINE_HEIGHT = 12.sp
+    val COURSE_MORE_BUTTON_LETTER_SPACING = 0.4.sp
+    val TITLE_FONT_SIZE = 22.sp
+    val TITLE_LINE_HEIGHT = 28.sp
+    val TITLE_LETTER_SPACING = 0.sp
+    val CHIP_FONT_SIZE = 12.sp
+    val CHIP_LINE_HEIGHT = 14.sp
+    val CHIP_LETTER_SPACING = 0.4.sp
+    val AUTHOR_LABEL_ALPHA = 0.5f
+    val SORT_FONT_SIZE = 14.sp
+    val SORT_LINE_HEIGHT = 20.sp
+    val SORT_LETTER_SPACING = 0.1.sp
+    val ACTION_MENU_FONT_SIZE = 14.sp
+    val ACTION_MENU_LINE_HEIGHT = 20.sp
+    val ACTION_MENU_LETTER_SPACING = 0.1.sp
+}

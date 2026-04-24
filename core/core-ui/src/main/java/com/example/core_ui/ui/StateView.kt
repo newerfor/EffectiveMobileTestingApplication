@@ -1,7 +1,6 @@
 package com.example.core_ui.ui
 
 import androidx.compose.foundation.background
-import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
@@ -19,28 +18,36 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
-import androidx.compose.ui.graphics.Color
-import androidx.compose.ui.res.stringResource
-import androidx.compose.ui.unit.dp
-import com.example.core_ui.R
+import com.example.core_ui.constant.StateViewConstant.EMPTY_MESSAGE_BUTTON_CORNER
+import com.example.core_ui.constant.StateViewConstant.EMPTY_MESSAGE_DESC_TO_BUTTON_SPACER
+import com.example.core_ui.constant.StateViewConstant.EMPTY_MESSAGE_TITLE_TO_DESC_SPACER
+import com.example.core_ui.constant.StateViewConstant.EMPTY_MESSAGE_TOP_SPACER
+import com.example.core_ui.constant.StateViewConstant.ERROR_MESSAGE_BOX_CORNER
+import com.example.core_ui.constant.StateViewConstant.ERROR_MESSAGE_BOX_PADDING
+import com.example.core_ui.constant.StateViewConstant.ERROR_MESSAGE_BUTTON_CORNER
+import com.example.core_ui.constant.StateViewConstant.ERROR_MESSAGE_BUTTON_FONT_SIZE
+import com.example.core_ui.constant.StateViewConstant.ERROR_MESSAGE_BUTTON_PADDING
+import com.example.core_ui.constant.StateViewConstant.ERROR_MESSAGE_PADDING
+import com.example.core_ui.constant.StateViewConstant.LOAD_ROUND_SIZE
 import com.example.core_ui.theme.BackgroundAvatar
 import com.example.core_ui.theme.BrandGreen
 import com.example.core_ui.theme.TextPrimary
 import com.example.core_ui.theme.TextSecondary
 
 @Composable
-fun LoadRound(){
+fun LoadRound() {
     Column(
-        Modifier.Companion.fillMaxSize(),
+        Modifier.fillMaxSize(),
         Arrangement.Center,
-        Alignment.Companion.CenterHorizontally,
+        Alignment.CenterHorizontally,
     ) {
         CircularProgressIndicator(
-            modifier = Modifier.Companion.size(50.dp),
+            modifier = Modifier.size(LOAD_ROUND_SIZE),
             color = TextPrimary
         )
     }
 }
+
 @Composable
 fun EmptyMessage(
     title: String = "Список пуст",
@@ -56,38 +63,36 @@ fun EmptyMessage(
         horizontalAlignment = Alignment.CenterHorizontally,
         verticalArrangement = Arrangement.Center
     ) {
+        Spacer(modifier = Modifier.height(EMPTY_MESSAGE_TOP_SPACER))
 
-        Spacer(modifier = Modifier.height(24.dp))
-
-        // Заголовок
         ActionLinkText(
             text = title,
             textColor = TextPrimary
         )
 
-        Spacer(modifier = Modifier.height(8.dp))
+        Spacer(modifier = Modifier.height(EMPTY_MESSAGE_TITLE_TO_DESC_SPACER))
 
-        // Описание
         CourseDescriptionText(
             text = description,
             textColor = TextSecondary
         )
 
         if (showButton) {
-            Spacer(modifier = Modifier.height(32.dp))
+            Spacer(modifier = Modifier.height(EMPTY_MESSAGE_DESC_TO_BUTTON_SPACER))
 
             Button(
                 onClick = onButtonClick,
                 colors = ButtonDefaults.buttonColors(
                     containerColor = BrandGreen
                 ),
-                shape = RoundedCornerShape(12.dp)
+                shape = RoundedCornerShape(EMPTY_MESSAGE_BUTTON_CORNER)
             ) {
                 ButtonLabelText(text = buttonText)
             }
         }
     }
 }
+
 @Composable
 fun ErrorMessage(
     onRetryClick: () -> Unit
@@ -95,16 +100,16 @@ fun ErrorMessage(
     Column(
         modifier = Modifier
             .fillMaxSize()
-            .padding(12.dp),
+            .padding(ERROR_MESSAGE_PADDING),
         horizontalAlignment = Alignment.CenterHorizontally,
         verticalArrangement = Arrangement.Bottom
     ) {
         Row(
             modifier = Modifier
                 .fillMaxWidth()
-                .clip(shape = RoundedCornerShape(20.dp))
+                .clip(shape = RoundedCornerShape(ERROR_MESSAGE_BOX_CORNER))
                 .background(BackgroundAvatar)
-                .padding(10.dp),
+                .padding(ERROR_MESSAGE_BOX_PADDING),
             verticalAlignment = Alignment.CenterVertically
         ) {
             ActionLinkText(
@@ -112,15 +117,18 @@ fun ErrorMessage(
                 textColor = TextPrimary
             )
             Spacer(modifier = Modifier.weight(1f))
-            Column(Modifier.padding(5.dp)){
+            Column(Modifier.padding(ERROR_MESSAGE_BUTTON_PADDING)) {
                 Button(
                     onClick = onRetryClick,
                     colors = ButtonDefaults.buttonColors(
                         containerColor = BrandGreen
                     ),
-                    shape = RoundedCornerShape(12.dp),
+                    shape = RoundedCornerShape(ERROR_MESSAGE_BUTTON_CORNER),
                 ) {
-                    ButtonLabelText(text = "Повторить", fontSize = 12)
+                    ButtonLabelText(
+                        text = "Повторить",
+                        fontSize = ERROR_MESSAGE_BUTTON_FONT_SIZE
+                    )
                 }
             }
         }

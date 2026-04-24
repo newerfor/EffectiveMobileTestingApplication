@@ -17,13 +17,8 @@ import com.example.feature_main.ui.SearchAndFilters.SearchAndFiltersScreen
 fun MainScreen(
     courses: List<CoursesDomainModel>,
     coursesViewModel: CoursesViewModel,
-    onLoading: MutableState<Boolean>,
-    onEmpty: MutableState<Boolean>,
-    listState: ScrollState
 ) {
     SearchAndFiltersScreen(coursesViewModel)
     Spacer(Modifier.height(SPACER_FILTER_TO_COURSES_CARD))
-    CoursesView(courses,coursesViewModel,listState,onLoading,onEmpty){
-        coursesViewModel.getNextPage()
-    }
+    CoursesView(courses,coursesViewModel)
 }

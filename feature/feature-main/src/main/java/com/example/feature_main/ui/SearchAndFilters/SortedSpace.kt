@@ -33,7 +33,7 @@ fun SortedSpace(coursesViewModel: CoursesViewModel) {
     ) {
         Row(
             modifier = Modifier.clickable {
-                coursesViewModel.sortingList()
+                coursesViewModel.isSorted()
             },
             verticalAlignment = Alignment.CenterVertically
         ) {

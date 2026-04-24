@@ -1,6 +1,5 @@
 package com.example.core_ui.ui.CoursesCard
 
-import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
@@ -14,15 +13,19 @@ import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.draw.blur
 import androidx.compose.ui.draw.clip
-import androidx.compose.ui.graphics.Color
-import androidx.compose.ui.unit.dp
+import com.example.core_ui.constant.CoursesCardConstant.GLASS_BLUR_RADIUS
+import com.example.core_ui.constant.CoursesCardConstant.GLASS_CHIP_CORNER
+import com.example.core_ui.constant.CoursesCardConstant.GLASS_CHIP_PADDING_HORIZONTAL
+import com.example.core_ui.constant.CoursesCardConstant.GLASS_CHIP_PADDING_VERTICAL
+import com.example.core_ui.constant.CoursesCardConstant.GLASS_CHIP_SPACING
+import com.example.core_ui.constant.CoursesCardConstant.GLASS_CIRCLE_BUTTON_SIZE
+import com.example.core_ui.constant.CoursesCardConstant.GLASS_TINT_ALPHA
+import com.example.core_ui.theme.GlassBackGroundColor
 import dev.chrisbanes.haze.HazeState
 import dev.chrisbanes.haze.HazeStyle
 import dev.chrisbanes.haze.HazeTint
 import dev.chrisbanes.haze.hazeEffect
-import dev.chrisbanes.haze.rememberHazeState
 
 @Composable
 fun GlassChip(
@@ -31,21 +34,22 @@ fun GlassChip(
 ) {
     Row(
         modifier = Modifier
-            .clip(RoundedCornerShape(12.dp))
+            .clip(RoundedCornerShape(GLASS_CHIP_CORNER))
             .hazeEffect(
                 state = hazeState,
                 style = HazeStyle(
-                    backgroundColor = Color(0xFF32333A),
-                    tints = listOf(HazeTint(Color(0xFF32333A).copy(alpha = 0.3f))),
-                    blurRadius = 8.dp
+                    backgroundColor = GlassBackGroundColor,
+                    tints = listOf(HazeTint(GlassBackGroundColor.copy(alpha = GLASS_TINT_ALPHA))),
+                    blurRadius = GLASS_BLUR_RADIUS
                 )
             )
-            .padding(horizontal = 6.dp, vertical = 4.dp),
+            .padding(horizontal = GLASS_CHIP_PADDING_HORIZONTAL, vertical = GLASS_CHIP_PADDING_VERTICAL),
         verticalAlignment = Alignment.CenterVertically,
-        horizontalArrangement = Arrangement.spacedBy(4.dp),
+        horizontalArrangement = Arrangement.spacedBy(GLASS_CHIP_SPACING),
         content = content
     )
 }
+
 @Composable
 fun GlassCircleButton(
     hazeState: HazeState,
@@ -54,14 +58,14 @@ fun GlassCircleButton(
 ) {
     Box(
         modifier = Modifier
-            .size(28.dp)
+            .size(GLASS_CIRCLE_BUTTON_SIZE)
             .clip(CircleShape)
             .hazeEffect(
                 state = hazeState,
                 style = HazeStyle(
-                    backgroundColor = Color(0xFF32333A),
-                    tints = listOf(HazeTint(Color(0xFF32333A).copy(alpha = 0.3f))),
-                    blurRadius = 8.dp
+                    backgroundColor = GlassBackGroundColor,
+                    tints = listOf(HazeTint(GlassBackGroundColor.copy(alpha = GLASS_TINT_ALPHA))),
+                    blurRadius = GLASS_BLUR_RADIUS
                 )
             )
             .clickable { onClick() },
